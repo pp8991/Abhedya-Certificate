@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .container
+    .row
+     .col.s12
+        nav(style="background-color: #082768")
+         x.nav-wrapper
+          span.flow-text 
+           | &nbsp; Abhedya Certificate
+     
+    form(action='/certificate' method="GET" enctype="multipart/form-data")
+      .row
+        .col.s12
+         h4 Photo Gallery
+      |<div class ="col s1"><img src = #{path} alt="image" class="responsive-img" /><p class="center-align caption">#{name}</p></div> 
