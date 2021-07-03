@@ -42,8 +42,23 @@ router.post('/upload', async (req, res) =>{
 /*GET a cartificate */
 router.get('/certificate/:name', async (req, res) =>{
     const photo = await Photos.findOne({ name: req.params.name});
+    if(!photo){
+        return res.status(404).send('No Photo Found');
+    }
     const newpath = '/'+photo.path;
     res.render('certificate', { path:newpath, name:photo.name});
+});
+
+/*Delete a certificate */
+router.delete('/certificate/delete/:name', async(req, res) =>{
+    try{
+        const photo = await Photos.findOneAndDelete({name:req.params.name});
+        if(!photo){
+            return res.status(404).send('Photo Not Found');
+        }
+    }catch(e){
+        res.status(500).send();
+    }
 });
 
 module.exports = router;
